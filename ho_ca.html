@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Hồ Cá Vui Nhộn - Nhạc Local Siêu Đỉnh</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <style>
+        #controls button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: 3px solid #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+        }
+        #controls button:hover {
+            background: #ff6b6b;
+            transform: scale(1.2);
+            box-shadow: 0 0 30px #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div id="shark"><img src="images/shark.png" alt="Cá mập"></div>
+        <div id="diver1"><img src="images/diver1.png"></div>
+        <div id="diver2"><img src="images/diver2.png"></div>
+        <div id="diver3"><img src="images/diver3.png"></div>
+        <div id="turtle"><img src="images/turtle.png"></div>
+        <div id="fish-container"></div>
+    </div>
+
+    <!-- 2 NÚT SIÊU XỊN -->
+    <div id="controls">
+        <button onclick="changeBackground()">Đổi Nền (PNG)</button>
+        <button onclick="toggleMusic()" id="musicBtn">Bật Nhạc Local</button>
+    </div>
+
+    <!-- NHẠC TỪ FILE LOCAL -->
+    <audio id="oceanSound" loop preload="auto">
+        <source src="music/ocean.mp3" type="audio/mp3">
+        <source src="music/ocean.wav" type="audio/wav">
+        <source src="music/ocean.ogg" type="audio/ogg">
+        Trình duyệt không hỗ trợ âm thanh.
+    </audio>
+
+    <script>
+        // Tạo 50 con cá
+        const container = document.getElementById('fish-container');
+        for (let i = 0; i < 50; i++) {
+            const fish = document.createElement('div');
+            fish.className = 'fish';
+            fish.innerHTML = `<img src="images/fish-${i % 2 === 0 ? 'gold' : 'white'}.png">`;
+            fish.style.top = Math.random() * 80 + 10 + '%';
+            fish.style.left = Math.random() * 100 + '%';
+            fish.style.animationDuration = (Math.random() * 25 + 25) + 's';
+            fish.style.animationDelay = Math.random() * 20 + 's';
+            container.appendChild(fish);
+        }
+
+        // Đổi nền PNG
+        let bgIndex = 0;
+        const backgrounds = ['bg1.png', 'bg2.png', 'bg3.png', 'bg4.png'];
+        function changeBackground() {
+            bgIndex = (bgIndex + 1) % backgrounds.length;
+            document.body.style.backgroundImage = `url('images/backgrounds/${backgrounds[bgIndex]}')`;
+            unlockAudio();
+        }
+
+        // NHẠC LOCAL - FIX CHROME AUTOPLAY
+        const audio = document.getElementById('oceanSound');
+        let unlocked = false;
+
+        function unlockAudio() {
+            if (unlocked) return;
+            audio.play().then(() => {
+                unlocked = true;
+                console.log("Nhạc local đã được mở khóa!");
+            }).catch(err => {
+                console.log("Chưa thể phát nhạc:", err);
+            });
+        }
+
+        function toggleMusic() {
+            unlockAudio();
+            if (audio.paused) {
+                audio.volume = 0.6;
+                audio.play();
+                document.getElementById('musicBtn').innerHTML = "Tắt Nhạc";
+            } else {
+                audio.pause();
+                document.getElementById('musicBtn').innerHTML = "Bật Nhạc Local";
+            }
+        }
+
+        // Mở khóa khi click bất kỳ đâu
+        document.body.addEventListener('click', unlockAudio, { once: true });
+        document.body.addEventListener('touchstart', unlockAudio, { once: true });
+
+        // Tự động thử phát khi load xong
+        window.addEventListener('load', () => {
+            audio.volume = 0.6;
+        });
+    </script>
+</body>
+</html>

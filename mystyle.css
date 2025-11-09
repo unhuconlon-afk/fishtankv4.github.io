@@ -1,0 +1,55 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #0c1e36 url('images/backgrounds/bg1.png') center/cover no-repeat fixed;
+    height: 100vh;
+    overflow: hidden;
+}
+#content { position: relative; width: 100%; height: 100%; }
+
+/* Các phần cá mập, thợ lặn, rùa, 50 con cá – giữ nguyên như lần trước */
+#shark { position: absolute; left: 100px; top: 400px; animation: shark 10s linear infinite; }
+#shark img { width: 230px; }
+@keyframes shark {
+    0%   { left: 100px; top: 400px; transform: scaleX(1); }
+    20%  { left: 300px; top: 400px; }
+    40%  { left: 500px; top: 300px; }
+    50%  { left: 600px; top: 500px; }
+    60%  { left: 600px; top: 100px; }
+    80%  { left: 500px; top: 200px; }
+    100% { left: 100px; top: 400px; transform: scaleX(-1); }
+}
+
+#diver1, #diver2, #diver3 { position: absolute; animation: swim linear infinite; }
+#diver1 { top: 180px; left: -200px; animation-duration: 16s; }
+#diver2 { top: 420px; left: -200px; animation-duration: 20s; animation-delay: 5s; }
+#diver3 { top: 320px; left: -200px; animation-duration: 18s; animation-delay: 10s; }
+@keyframes swim { 0% { left: -200px; } 100% { left: 110vw; } }
+#diver1 img, #diver2 img, #diver3 img { width: 160px; }
+
+#turtle { position: absolute; top: 620px; left: 150px; animation: turtle 32s linear infinite; }
+#turtle img { width: 200px; }
+@keyframes turtle {
+    0%   { left: 150px; transform: scaleX(1); }
+    48%  { left: calc(100vw - 300px); transform: scaleX(1); }
+    50%  { transform: scaleX(-1); }
+    98%  { left: 150px; transform: scaleX(-1); }
+    100% { transform: scaleX(1); }
+}
+
+#fish-container { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+.fish { position: absolute; animation: fishSwim linear infinite; }
+.fish img { width: 60px; filter: drop-shadow(0 0 8px rgba(255,255,255,0.7)); }
+@keyframes fishSwim {
+    0%   { transform: translateX(-100px) scaleX(1); }
+    48%  { transform: translateX(calc(100vw + 100px)) scaleX(1); }
+    50%  { transform: translateX(calc(100vw + 100px)) scaleX(-1); }
+    98%  { transform: translateX(-100px) scaleX(-1); }
+    100% { transform: translateX(-100px) scaleX(1); }
+}
+
+#controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}

@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8">
-    <title>Hồ Cá Vui Nhộn - Nhạc Local Siêu Đỉnh</title>
+    <title>Hồ Cá </title>
     <link rel="stylesheet" href="mystyle.css">
     <style>
         #controls button {
@@ -37,8 +37,8 @@
 
     <!-- 2 NÚT SIÊU XỊN -->
     <div id="controls">
-        <button onclick="changeBackground()">Đổi Nền (PNG)</button>
-        <button onclick="toggleMusic()" id="musicBtn">Bật Nhạc Local</button>
+        <button onclick="changeBackground()">Đổi Nền </button>
+        <button onclick="toggleMusic()" id="musicBtn">Bật Nhạc</button>
     </div>
 
     <!-- NHẠC TỪ FILE LOCAL -->
@@ -46,7 +46,7 @@
         <source src="music/ocean.mp3" type="audio/mp3">
         <source src="music/ocean.wav" type="audio/wav">
         <source src="music/ocean.ogg" type="audio/ogg">
-        Trình duyệt không hỗ trợ âm thanh.
+        
     </audio>
 
     <script>
@@ -94,7 +94,7 @@
                 document.getElementById('musicBtn').innerHTML = "Tắt Nhạc";
             } else {
                 audio.pause();
-                document.getElementById('musicBtn').innerHTML = "Bật Nhạc Local";
+                document.getElementById('musicBtn').innerHTML = "Bật Nhạc";
             }
         }
 
@@ -109,3 +109,4 @@
     </script>
 </body>
 </html>
+
